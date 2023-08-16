@@ -7,8 +7,8 @@
 # This file may be distributed under the terms of the GNU GPLv3 license.
 import threading
 import logging
-import chelper
-import pins
+from klippy import chelper
+from klippy import pins
 import math
 import time
 import queue
@@ -17,13 +17,13 @@ import struct
 import numpy as np
 import copy
 from numpy.polynomial import Polynomial
-from . import manual_probe
-from . import probe
-from . import bed_mesh
-from . import thermistor
-from . import adc_temperature
-from mcu import MCU, MCU_trsync
-from clocksync import SecondarySync
+from klippy.extras import manual_probe
+from klippy.extras import probe
+from klippy.extras import bed_mesh
+from klippy.extras import thermistor
+from klippy.extras import adc_temperature
+from klippy.mcu import MCU, MCU_trsync
+from klippy.clocksync import SecondarySync
 
 STREAM_BUFFER_LIMIT_DEFAULT = 100
 
@@ -1678,10 +1678,10 @@ def load_config(config):
     return beacon
 
 def load_config_prefix(config):
-    beacon = config.get_printer().lookup_object('beacon')
+    beacon = config.get_printer().lookup_object('beacon_klipper.beacon')
     name = config.get_name()
-    if name.startswith('beacon model '):
-        name = name[13:]
+    if name.startswith('beacon_klipper.beacon model '):
+        name = name[28:]
         model = BeaconModel.load(name, config, beacon)
         beacon._register_model(name, model)
         return model
