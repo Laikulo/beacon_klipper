@@ -12,8 +12,8 @@ import os
 import importlib
 import traceback
 import logging
-import chelper
-import pins
+from klippy import chelper
+from klippy import pins
 import math
 import time
 import queue
@@ -23,15 +23,15 @@ import copy
 import collections
 import itertools
 from numpy.polynomial import Polynomial
-from . import manual_probe
-from . import probe
-from . import bed_mesh
-from . import thermistor
-from . import adxl345
-from .homing import HomingMove
-from mcu import MCU, MCU_trsync
-from clocksync import SecondarySync
 import msgproto
+from klippy.homing import HomingMove
+from klippy.extras import manual_probe
+from klippy.extras import probe
+from klippy.extras import bed_mesh
+from klippy.extras import thermistor
+from klippy.extras import adxl345
+from klippy.mcu import MCU, MCU_trsync
+from klippy.clocksync import SecondarySync
 
 STREAM_BUFFER_LIMIT_DEFAULT = 100
 STREAM_TIMEOUT = 1.0
@@ -1588,7 +1588,7 @@ class BeaconModel:
 
     def save(self, beacon, show_message=True):
         configfile = beacon.printer.lookup_object("configfile")
-        section = "beacon model " + self.name
+        section = "klipper_beacon.beacon model " + self.name
         configfile.set(section, "model_coef", ",\n  ".join(map(str, self.poly.coef)))
         configfile.set(section, "model_domain", ",".join(map(str, self.poly.domain)))
         configfile.set(section, "model_range", "%f,%f" % (self.min_z, self.max_z))
@@ -1885,8 +1885,8 @@ class ModelManager:
         model = self.beacon.models.get(name, None)
         if model is None:
             raise gcmd.error("Unknown model '%s'" % (name,))
-        configfile = self.beacon.printer.lookup_object("configfile")
-        section = "beacon model " + model.name
+        configfile = self.beacon.printer.lookup_object('configfile')
+        section = "klipper_beacon.beacon model " + model.name
         configfile.remove_section(section)
         self.beacon.models.pop(name)
         gcmd.respond_info(
@@ -3662,10 +3662,10 @@ def load_config(config):
 
 
 def load_config_prefix(config):
-    beacon = config.get_printer().lookup_object("beacon")
+    beacon = config.get_printer().lookup_object('klipper_beacon.beacon')
     name = config.get_name()
-    if name.startswith("beacon model "):
-        name = name[13:]
+    if name.startswith('klipper_beacon.beacon model '):
+        name = name[28:]
         model = BeaconModel.load(name, config, beacon)
         beacon._register_model(name, model)
         return model
