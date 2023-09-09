@@ -792,7 +792,7 @@ class BeaconModel:
 
     def save(self, beacon, show_message=True):
         configfile = beacon.printer.lookup_object('configfile')
-        section = "beacon model " + self.name
+        section = "beacon_klipper beacon model " + self.name
         configfile.set(section, 'model_coef',
                        ",\n  ".join(map(str, self.poly.coef)))
         configfile.set(section, 'model_domain',
