@@ -10,5 +10,5 @@ dependencies = [
   "numpy>=1.16.6",
   "klippy"
 ]
-version = "1.0.2+git.g11832cb"
+version = "1.0.3"
 
