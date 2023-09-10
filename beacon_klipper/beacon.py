@@ -963,7 +963,7 @@ class ModelManager:
         if model is None:
             raise gcmd.error("Unknown model '%s'" % (name,))
         configfile = self.beacon.printer.lookup_object('configfile')
-        section = "beacon model " + model.name
+        section = "beacon_klipper.beacon model " + model.name
         configfile.remove_section(section)
         self.beacon.models.pop(name)
         gcmd.respond_info("Model '%s' was removed for the current session.\n"
