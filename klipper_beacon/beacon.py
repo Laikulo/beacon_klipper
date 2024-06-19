@@ -23,7 +23,7 @@ import copy
 import collections
 import itertools
 from numpy.polynomial import Polynomial
-import msgproto
+from klippy import msgproto
 from klippy.homing import HomingMove
 from klippy.extras import manual_probe
 from klippy.extras import probe
