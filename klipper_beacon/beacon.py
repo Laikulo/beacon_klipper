@@ -24,7 +24,7 @@ import collections
 import itertools
 from numpy.polynomial import Polynomial
 from klippy import msgproto
-from klippy.homing import HomingMove
+from klippy.extras.homing import HomingMove
 from klippy.extras import manual_probe
 from klippy.extras import probe
 from klippy.extras import bed_mesh
