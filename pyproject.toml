@@ -1,16 +1,18 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name="klipper-beacon"
 description = "Beacon component for Klipper"
-license = { text = "GPL-3.0" }
+license = {text = "GPL-3.0"}
 dependencies = [
   "numpy>=1.16.6",
   "scipy>=1.2.3"
 ]
-version = "1.0.6"
+dynamic = ["version"]
 
 [tool.setuptools]
-packages = [ "klipper_beacon" ]
+packages = ["klipper_beacon"]
+
+[tool.setuptools_scm]
