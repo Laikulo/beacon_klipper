@@ -3845,7 +3845,7 @@ def load_config_prefix(config):
     beacons = get_beacons(config)
     sensor = None
     secname = config.get_name()
-    parts = secname[28:].split()
+    parts = secname[len("klipper_beacon.beacon")+1:].split()
 
     if len(parts) != 0 and parts[0] == "sensor":
         if len(parts) < 2:
