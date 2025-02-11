@@ -3739,14 +3739,14 @@ class BeaconTracker:
 
     def add_sensor(self, name):
         if name is None:
-            cfg = self.config.getsection("beacon")
+            cfg = self.config.getsection("klipper_beacon.beacon")
         else:
             if not name.islower():
                 raise self.config.error(
                     "Beacon sensor name must be all lower case, sensor name '%s' is not valid"
                     % (name,)
                 )
-            cfg = self.config.getsection("beacon sensor " + name)
+            cfg = self.config.getsection("klipper_beacon.beacon sensor " + name)
         self.sensors[name] = sensor = BeaconProbe(cfg, BeaconId(name, self))
         if name is None:
             self.printer.add_object("probe", BeaconProbeWrapper(sensor))
@@ -3830,10 +3830,10 @@ class BeaconId:
 
 def get_beacons(config):
     printer = config.get_printer()
-    beacons = printer.lookup_object("beacons", None)
+    beacons = printer.lookup_object("klipper_beacon.beacons", None)
     if beacons is None:
         beacons = BeaconTracker(config, printer)
-        printer.add_object("beacons", beacons)
+        printer.add_object("klipper_beacon.beacons", beacons)
     return beacons
 
 
