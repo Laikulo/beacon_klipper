@@ -8,8 +8,7 @@ description = "Beacon component for Klipper"
 license = { text = "GPL-3.0" }
 dependencies = [
   "numpy>=1.16.6",
-  "scipy>=1.2.3",
-  "klipper-klippy-l"
+  "scipy>=1.2.3"
 ]
 version = "1.0.6"
 
